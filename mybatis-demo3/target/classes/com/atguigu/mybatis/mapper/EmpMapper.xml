@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.atguigu.mybatis.mapper.EmpMapper">
+    <resultMap id="resultMap" type="Emp">
+        <id property="eid" column="eid"></id>
+        <result property="empName" column="emp_name"></result>
+        <result property="age" column="age"></result>
+        <result property="email" column="email"></result>
+    </resultMap>
 
 <!--    Emp getAllEmp(@Param("id") Integer id);-->
-        <select id="getAllEmp" resultType="Emp">
+        <select id="getAllEmp1" resultType="Emp">
             select eid,emp_name empName,age,sex,email from t_emp
         </select>
+
+<!--    每个设置映射名-->
+    <select id="getAllEmp" resultMap="resultMap">
+        select * from t_emp
+    </select>
 
 </mapper>
