@@ -7,9 +7,30 @@
     <!--    User getUserByUserName(String username);-->
     <!--    使用#{}，里面内容可以随便写，都是传进来的username的值-->
     <select id="getUserByUserName" resultType="User">
-        select * from t_user where username = #{username}
+        select * from t_user where username = #{param1} and password = #{param2}
     </select>
 
 
+<!--    User checkLogin(String username, String password);-->
+    <select id="checkLogin" resultType="User">
+        select * from t_user where username = #{username} and password = #{password}
+    </select>
+
+<!--    User checkLoginByMap(Map<String, Object> map);-->
+    <select id="checkLoginByMap" resultType="User">
+        select * from t_user where username = #{username} and password = #{password}
+    </select>
+
+
+<!--    int insertUser(User user);-->
+    <insert id="insertUser" >
+        insert into t_user values(123, #{username}, #{password}, #{age}, #{gender}, #{email})
+    </insert>
+
+    <!--    以@Param的值为键，参数为值; 或以"param1"/"param2"为键，参数为值-->
+    <!--    User checkLoginByParam(@Param("username") String username, @Param("password") String password);-->
+    <select id="checkLoginByParam" resultType="User">
+        select * from t_user where username = #{username} and password = #{password}
+    </select>
 
 </mapper>
