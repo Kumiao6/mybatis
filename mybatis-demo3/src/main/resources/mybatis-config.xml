@@ -6,9 +6,14 @@
 
     <properties resource="jdbc.properties"></properties>
 
+    <settings>
+        <!--        将下划线自动映射成驼峰，比如emp_name -> empName -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
     <typeAliases>
         <package name="com.atguigu.mybatis.pojo"></package>
     </typeAliases>
+    <!--    设置MyBatis的全剧配置-->
 
     <!--设置连接数据库的环境-->
     <environments default="development">
