@@ -15,4 +15,10 @@ public interface EmpMapper {
     List<Emp> getAllEmp();
 
     List<Emp> getAllEmpAndDept(int eid);
+
+    /*
+    通过分步查询员工信息
+     */
+    Emp getEmpAndDeptByStepOne(@Param("eid") Integer eid);
+
 }

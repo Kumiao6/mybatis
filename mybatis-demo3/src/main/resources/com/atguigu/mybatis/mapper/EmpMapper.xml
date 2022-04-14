@@ -8,7 +8,27 @@
         <result property="email" column="email"></result>
     </resultMap>
 
-    <resultMap id="getEmpAndDeptResultMapOne" type="Emp">
+    <resultMap id="getEmpAndDeptByStepResultMap" type="Emp">
+        <id property="eid" column="eid"></id>
+        <result property="empName" column="emp_name"></result>
+        <result property="email" column="email"></result>
+        <result property="age" column="age"></result>
+        <!--
+        select: 设置分步查询的sql的唯一标识（namespace.SQLId或mapper接口的全类名.方法名）
+        column：分步查询的条件
+        fetchType: 当开启了全局的延迟记载后，可通过此属性手动控制延迟加载的效果
+        fetchType："lazy/eager" lazy表示延迟加载，eager表示立即加载
+-->
+        <association property="dept"
+                     select="com.atguigu.mybatis.mapper.DeptMapper.getEmpAndDeptByStepTwo"
+                     column="did"
+                     fetchType="lazy">
+        </association>
+    </resultMap>
+
+
+<!--    1、级联方式处理映射关系-->
+    <resultMap id="getEmpAndDeptResultMapOne1" type="Emp">
         <id property="eid" column="eid"></id>
         <result property="empName" column="emp_name"></result>
         <result property="email" column="email"></result>
@@ -16,6 +36,21 @@
         <result property="dept.did" column="did"></result>
         <result property="dept.deptName" column="dept_name"></result>
     </resultMap>
+
+<!--   2、使用association处理映射关系-->
+    <resultMap id="getEmpAndDeptResultMapOne" type="Emp">
+        <id property="eid" column="eid"></id>
+        <result property="empName" column="emp_name"></result>
+        <result property="email" column="email"></result>
+        <result property="age" column="age"></result>
+        <association property="dept" javaType="Dept">
+            <result property="did" column="did"></result>
+            <result property="deptName" column="dept_name"></result>
+        </association>
+    </resultMap>
+
+
+
 <!--    1、设置别名"Emp getAllEmp(@Param("id") Integer id);-->
         <select id="getAllEmp1" resultType="Emp">
             select eid,emp_name empName,age,sex,email from t_emp
@@ -41,5 +76,8 @@
         where eid = #{eid}
     </select>
 
-
+    <!--    Emp getEmpAndDeptByStepOne(@Param("eid") Integer eid);-->
+    <select id="getEmpAndDeptByStepOne" resultMap="getEmpAndDeptByStepResultMap">
+        select * from t_emp where eid = #{eid}
+    </select>
 </mapper>

@@ -3,5 +3,32 @@
 <mapper namespace="com.atguigu.mybatis.mapper.DeptMapper">
 
 
+    <!--        Dept getEmpAndDeptByStepTwo(Integer did);-->
+    <!--    分步查询可以实现懒加载-->
+    <select id="getEmpAndDeptByStepTwo" resultType="Dept">
+        select * from t_dept where did = #{did}
+    </select>
+
+
+    <resultMap id="deptAndEmpResultMap" type="Dept">
+        <id property="did" column="did"></id>
+        <result property="deptName" column="dept_name"></result>
+        <collection property="emps" fetchType="lazy" ofType="Emp">
+            <id property="eid" column="eid" ></id>
+            <result property="empName" column="emp_name"></result>
+            <result property="age" column="age"></result>
+            <result property="email" column="email"></result>
+        </collection>
+    </resultMap>
+
+
+<!--    Dept getDeptAndEmpByStepOne(@Param("did") Integer eid);-->
+    <select id="getDeptAndEmpByStepOne" resultMap="deptAndEmpResultMap">
+        select *
+        from t_dept
+                 left join t_emp on t_dept.did = t_emp.did
+        where t_dept.did = #{did}
+
+    </select>
 
 </mapper>
