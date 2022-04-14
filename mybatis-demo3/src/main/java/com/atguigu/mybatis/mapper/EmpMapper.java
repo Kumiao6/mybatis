@@ -1,5 +1,6 @@
 package com.atguigu.mybatis.mapper;
 
+import com.atguigu.mybatis.pojo.Dept;
 import com.atguigu.mybatis.pojo.Emp;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -21,4 +22,6 @@ public interface EmpMapper {
      */
     Emp getEmpAndDeptByStepOne(@Param("eid") Integer eid);
 
+
+    List<Emp> getDeptAndEmpByStepTwo(@Param("did") Integer did);
 }

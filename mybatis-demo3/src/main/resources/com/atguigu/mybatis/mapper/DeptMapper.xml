@@ -31,4 +31,20 @@
 
     </select>
 
+
+
+
+    <resultMap id="DeptAndEmpByStepOneResultMap" type="Dept">
+        <id property="did" column="did"></id>
+        <result property="deptName" column="dept_name"></result>
+        <collection property="emps"
+                    select="com.atguigu.mybatis.mapper.EmpMapper.getDeptAndEmpByStepTwo"
+                    column="did"></collection>
+    </resultMap>
+    <!--Dept getDeptAndEmpByStepOne(@Param("did") Integer did);-->
+    <select id="getDeptAndEmpByStepOne1" resultMap="DeptAndEmpByStepOneResultMap">
+        select * from t_dept where did = #{did}
+    </select>
+
+
 </mapper>

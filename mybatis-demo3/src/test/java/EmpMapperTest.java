@@ -69,6 +69,15 @@ public class EmpMapperTest {
         Dept dept = new Dept();
         dept = mapper.getDeptAndEmpByStepOne(1);
         System.out.println(dept);
+    }
 
+    @Test
+    public void getEmpAndDeptByStepOne2() {
+        SqlSession sqlSession = SqlSessionUtils.getSqlSession();
+        EmpMapper mapper = sqlSession.getMapper(EmpMapper.class);
+        Emp emp = mapper.getEmpAndDeptByStepOne(1);
+//        System.out.println(emp);
+        System.out.println("#######################");
+        System.out.println(emp.getEmpName());
     }
 }
