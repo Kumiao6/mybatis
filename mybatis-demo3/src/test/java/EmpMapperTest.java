@@ -21,7 +21,16 @@ public class EmpMapperTest {
 
 
         list.forEach(emp -> System.out.println(emp));
-
-
     }
+
+    //    List<Emp> getAllEmpAndDept();
+    @Test
+    public void getAllEmpAndDept() {
+        SqlSession sqlSession = SqlSessionUtils.getSqlSession();
+        EmpMapper mapper = sqlSession.getMapper(EmpMapper.class);
+
+        List<Emp> emps = mapper.getAllEmpAndDept(1);
+        System.out.println(emps);
+    }
+
 }

@@ -8,6 +8,14 @@
         <result property="email" column="email"></result>
     </resultMap>
 
+    <resultMap id="getEmpAndDeptResultMapOne" type="Emp">
+        <id property="eid" column="eid"></id>
+        <result property="empName" column="emp_name"></result>
+        <result property="email" column="email"></result>
+        <result property="age" column="age"></result>
+        <result property="dept.did" column="did"></result>
+        <result property="dept.deptName" column="dept_name"></result>
+    </resultMap>
 <!--    1、设置别名"Emp getAllEmp(@Param("id") Integer id);-->
         <select id="getAllEmp1" resultType="Emp">
             select eid,emp_name empName,age,sex,email from t_emp
@@ -23,6 +31,14 @@
             <settings><setting name="mapUnderscoreToCamelCase" value="true"/> </settings> -->
     <select id="getAllEmp" resultType="Emp">
         select *  from t_emp
+    </select>
+
+<!--    List<Emp> getAllEmpAndDept();-->
+    <select id="getAllEmpAndDept" resultMap="getEmpAndDeptResultMapOne">
+        select *
+        from t_emp
+                 left join t_dept on t_emp.did = t_dept.did
+        where eid = #{eid}
     </select>
 
 
