@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.atguigu.mybatis.mapper.DynamicSQLMapper">
+
+    <!--        int insertMoreByList(List<Emp> emps);-->
+    <!--    不加注解会报错：Parameter 'emps' not found. Available parameters are [arg0, collection, list]-->
+    <!--    int insertMoreByList(@Param("emps") List<Emp> emps);-->
+    <insert id="insertMoreByList">
+        insert into t_emp values
+        <foreach collection="emps" item="emp" separator=",">
+            (null, #{emp.empName}, #{emp.age}, #{emp.sex}, #{emp.email}, null)
+        </foreach>
+    </insert>
+
+    <!--    int deleteMoreByArray(@Param("eids") Integer[] eids);-->
+    <delete id="deleteMoreByArray" >
+        delete from t_emp where eid in
+        (
+            <foreach collection="eids" item="eid" separator=",">
+                #{eid}
+            </foreach>
+            )
+    </delete>
+
+    <!--    List<Emp> getEmpCoundition(Emp emp);-->
+    <select id="getEmpCoundition" resultType="Emp">
+        select * from t_emp
+        <where>
+            <choose>
+                <when test="empName != null and empName !=''">
+                    emp_name = #{empName}
+                </when>
+                <when test="age != null and age != ''">
+                    age = #{age}
+                </when>
+                <when test="sex != null and sex != ''">
+                    sex = #{sex}
+                </when>
+                <when test="email != null and email != '' ">
+                    email = #{email}
+                </when>
+                <otherwise>
+                    did = 1
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <!--    List<Emp> getEmpCoundition(Emp emp);-->
+    <select id="getEmpCoundition4" resultType="Emp">
+        select * from t_emp
+            <where>
+                <choose>
+                    <when test="empName != null and empName !=''">
+                        emp_name = #{empName}
+                    </when>
+                    <when test="age != null and age != ''">
+                        age = #{age}
+                    </when>
+                    <when test="sex != null and sex != ''">
+                        sex = #{sex}
+                    </when>
+                    <when test="email != null and email != '' ">
+                        email = #{email}
+                    </when>
+                    <otherwise>
+                        did = 1
+                    </otherwise>
+                </choose>
+            </where>
+    </select>
+
+    <!--    List<Emp> getEmpCoundition(Emp emp);-->
+    <select id="getEmpCoundition3" resultType="Emp">
+        select * from t_emp
+        <trim prefix="where" suffixOverrides="and">
+
+            <if test="empName != null and empName !=''">
+                 emp_name = #{empName} and
+            </if>
+            <if test="age != null and age != ''">
+                 age = #{age} and
+            </if>
+            <if test="sex != null and sex != ''">
+                 sex = #{sex} and
+            </if>
+            <if test="email != null and email != '' ">
+                 email = #{email} and
+            </if>
+
+        </trim>
+
+    </select>
+
+    <!--    List<Emp> getEmpCoundition(Emp emp);-->
+    <select id="getEmpCoundition2" resultType="Emp">
+        select * from t_emp
+        <where>
+            <if test="empName != null and empName !=''">
+                and  emp_name = #{empName}
+            </if>
+            <if test="age != null and age != ''">
+                and  age = #{age}
+            </if>
+            <if test="sex != null and sex != ''">
+                and  sex = #{sex}
+            </if>
+            <if test="email != null and email != '' ">
+                and email = #{email}
+            </if>
+        </where>
+
+    </select>
+
+<!--    List<Emp> getEmpCoundition(Emp emp);-->
+    <select id="getEmpCoundition1" resultType="Emp">
+        select * from t_emp  where 1=1
+        <if test="empName != null and empName !=''">
+            emp_name = #{empName}
+        </if>
+        <if test="age != null and age != ''">
+            and age = #{age}
+        </if>
+        <if test="sex != null and sex != ''">
+            and sex = #{sex}
+        </if>
+        <if test="email != null and email != '' ">
+            and email = #{email}
+        </if>
+
+    </select>
+
+
+    <!--    sql片段-->
+    <!--        List<Emp> getAllEmpNameAndAge();-->
+    <sql id="empColumns">emp_name, age</sql>
+    <select id="getAllEmpNameAndAge" resultType="Emp">
+        select <include refid="empColumns"></include> from t_emp
+    </select>
+
+</mapper>
