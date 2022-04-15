@@ -1,3 +1,4 @@
+import com.atguigu.mybatis.mapper.CacheMapper;
 import com.atguigu.mybatis.mapper.DynamicSQLMapper;
 import com.atguigu.mybatis.pojo.Emp;
 import com.atguigu.mybatis.utils.SqlSessionUtils;
@@ -80,5 +81,7 @@ public class DynamitSQLMapperTest {
         DynamicSQLMapper mapper = sqlSession.getMapper(DynamicSQLMapper.class);
         System.out.println(mapper.getAllEmpNameAndAge());
     }
+
+
 
 }
