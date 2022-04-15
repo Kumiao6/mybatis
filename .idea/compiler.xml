@@ -12,6 +12,7 @@
         <module name="mybatis-demo1" />
         <module name="com.atguigu" />
         <module name="mybatis-demo2" />
+        <module name="mybatis-demo5" />
       </profile>
     </annotationProcessing>
   </component>

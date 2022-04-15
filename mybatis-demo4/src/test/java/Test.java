@@ -26,5 +26,10 @@ public class Test {
         Emp emp = new Emp();
         emp =  mapper.selectByPrimaryKey(1);
         List<Emp> emps = mapper.selectAll();
+
+        System.out.println(mapper.selectByPrimaryKey(2));
+
+        mapper.updateByPrimaryKey(emp);
+
     }
 }
