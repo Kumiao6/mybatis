@@ -5,6 +5,12 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis-demo5/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis-demo4/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis-demo3/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis-demo2/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis-demo1/pom.xml" />
+        <option value="$PROJECT_DIR$/mybatis-plus/pom.xml" />
       </list>
     </option>
   </component>
